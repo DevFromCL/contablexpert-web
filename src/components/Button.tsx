@@ -1,6 +1,11 @@
 "use client";
 
-const Button = ({onClick, text}) => {
+interface ButtonProps {
+    onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    text: string;
+}
+
+const Button: React.FC<ButtonProps> = ({ onClick, text }) => {
     return (
         <button
             onClick={onClick}

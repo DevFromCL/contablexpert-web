@@ -1,4 +1,17 @@
-const InputField = ({ id, label, type = "text", placeholder, placeholderIcon, value, onChange, autoComplete = "off" }) => {
+import { ChangeEvent } from "react";
+
+interface InputFieldProps {
+  id: string;
+  label: string;
+  type?: string; // "text" por defecto
+  placeholder?: string;
+  placeholderIcon?: React.ReactNode; // por si es un ícono de React
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  autoComplete?: string;
+}
+
+const InputField:React.FC<InputFieldProps> = ({ id, label, type = "text", placeholder, placeholderIcon, value, onChange, autoComplete = "off" }) => {
     return (
         <div className="flex flex-col">
             <label htmlFor={id}>{label}</label>

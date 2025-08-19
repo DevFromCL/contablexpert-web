@@ -12,19 +12,19 @@ export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    function handleLogin(e) {
+    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        backendApi.post("/auth/login", { email, password })
-        .then(response => {
-            console.log({response});
-            localStorage.setItem("user", JSON.stringify({ email, password }));
-            router.push("/home");
-        })
-        .catch(error => {
-            console.log({error});
-            alert("Credenciales incorrectas");
-        });
+        await backendApi.post("/auth/login", { email, password })
+            .then(response => {
+                console.log({ response });
+                localStorage.setItem("user", JSON.stringify({ email, password }));
+                router.push("/home");
+            })
+            .catch(error => {
+                console.log({ error });
+                alert("Credenciales incorrectas");
+            });
     }
 
     return (
@@ -33,27 +33,27 @@ export default function LoginPage() {
                 <h1 className="text-5xl font-bold ">Bienvenido 👋</h1>
                 {/* <p className="text-gray-400">(admin@gmail.com, 123)</p> */}
                 <div className="flex flex-col gap-5">
-                    <InputField 
-                        value={email}  
-                        autoComplete='on' 
-                        onChange={e => setEmail(e.target.value)} 
-                        label='' 
-                        type="text" 
-                        id="email" 
+                    <InputField
+                        value={email}
+                        autoComplete='on'
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                        label=''
+                        type="text"
+                        id="email"
                         placeholderIcon={<BsFillEnvelopeFill />}
-                        placeholder="Correo" 
+                        placeholder="Correo"
                     />
-                    <InputField 
-                        value={password} 
-                        onChange={e => setPassword(e.target.value)} 
-                        label='' 
-                        type="password" 
+                    <InputField
+                        value={password}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                        label=''
+                        type="password"
                         id="password"
                         placeholderIcon={<BsLock />}
-                        placeholder="Contraseña" 
+                        placeholder="Contraseña"
                     />
                 </div>
-                <Button onClick={() => {}} text={'Login'} />
+                <Button onClick={() => { }} text={'Login'} />
             </form>
         </section>
     );
