@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react";
 
-interface InputFieldProps {
+interface InputFieldProps  {
   id: string;
   label: string;
   type?: string; // "text" por defecto
@@ -9,9 +9,12 @@ interface InputFieldProps {
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   autoComplete?: string;
+  inputMode?: "text" | "search" | "email" | "tel" | "url" | "none" | "numeric" | "decimal" | undefined;
+  className?: string;
+  autoFocus?: boolean;
 }
 
-const InputField:React.FC<InputFieldProps> = ({ id, label, type = "text", placeholder, placeholderIcon, value, onChange, autoComplete = "off" }) => {
+const InputField:React.FC<InputFieldProps> = ({ id, label, type = "text", inputMode, placeholder, placeholderIcon, value, onChange, autoComplete = "off", className, autoFocus }) => {
     return (
         <div className="flex flex-col">
             <label htmlFor={id}>{label}</label>
@@ -22,10 +25,13 @@ const InputField:React.FC<InputFieldProps> = ({ id, label, type = "text", placeh
                 <input
                     value={value}
                     onChange={onChange}
-                    type={type} id={id}
+                    type={type} 
+                    id={id}
+                    autoFocus={autoFocus}
+                    inputMode={inputMode}
                     autoComplete={autoComplete}
                     placeholder={placeholder}
-                    className="p-3 ps-9 rounded-2xl bg-[#181818] outline-none focus:outline-none focus:bg-[#181818] border border-[#333] w-full"
+                    className={`p-3 ps-9 rounded-2xl bg-[#181818] outline-none focus:outline-none focus:bg-[#181818] border border-[#333] w-full ${className}`}
                 />
             </div>
         </div>

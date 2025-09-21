@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ContableXpert Web
 
-## Getting Started
+Aplicación web desarrollada para la gestión contable.
+Este proyecto busca ser escalable, mantenible y fácil de extender.
 
-First, run the development server:
+---
 
+## 🚀 Scripts disponibles
+
+| Script    | Comando                  | Descripción                             |
+| --------- | ------------------------ | ---------------------------------------- |
+| `dev`   | `next dev --turbopack` | Inicia la aplicación en modo desarrollo |
+| `lint`  | `next lint`            | Ejecuta ESLint para revisar el código   |
+
+
+
+## 🔹 Estructura de carpetas
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+src/
+ ├─ app/                 # Rutas y páginas (Next.js App Router)
+ │   ├─ (private)        # Rutas privadas
+ │   │  └─ ...
+ │   ├─ page.tsx         # Rutas publicas
+ │   └─ ...
+ │
+ ├─ components/          # Componentes de UI y bloques reutilizables
+ │   ├─ ui/              # Componentes atómicos y sus variantes (Button, Card, Input, etc.)
+ │   │  └─ ...
+ │   ├─ layout/          # Define la estructura general o contenedores de la página (Se enfoca en cómo se organiza la página, no en el contenido específico)
+ │   │  ├─ page          # Contenedores, grids y wrappers
+ │   │  └─ nav           # componentes fijos o recurrentes que aparecen en muchas páginas
+ │   │    
+ │   ├─ sections/        # Componentes de contenido que forman parte de una página (Hero, Features, CTA, etc.)
+ │   └─ forms/           # Formularios (LoginForm, RegisterForm, etc.)
+ │
+ ├─ utils.ts             # Utilidades y funciones auxiliares
+ ├─ hooks/               # Custom hooks de React
+ ├─ styles/              # Estilos 
+ └─ config/              # Configuración centralizada (Constantes)
 ```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Dependencias principales
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Paquete         | Versión | Uso principal                    |
+| --------------- | -------- | -------------------------------- |
+| `next`        | 15.4.5   | Framework React para SSR y rutas |
+| `react`       | 19.1.0   | Librería principal de UI        |
+| `react-dom`   | 19.1.0   | Renderizado de React en el DOM   |
+| `axios`       | ^1.11.0  | Cliente HTTP para consumir APIs  |
+| `react-icons` | ^5.5.0   | Íconos para la interfaz         |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## ⚙️ Dependencias de desarrollo
 
-To learn more about Next.js, take a look at the following resources:
+| Paquete                  | Versión | Uso principal                                 |
+| ------------------------ | -------- | --------------------------------------------- |
+| `typescript`           | ^5       | Tipado estático                              |
+| `tailwindcss`          | ^4       | Framework CSS para estilos utility-first      |
+| `@tailwindcss/postcss` | ^4       | Integración Tailwind + PostCSS               |
+| `eslint`               | ^9       | Linter para mantener calidad de código       |
+| `eslint-config-next`   | 15.4.5   | Configuración ESLint recomendada por Next.js |
+| `@types/react`         | ^19      | Tipos TypeScript para React                   |
+| `@types/react-dom`     | ^19      | Tipos TypeScript para ReactDOM                |
+| `@types/node`          | ^20      | Tipos Node.js                                 |
+| `@eslint/eslintrc`     | ^3       | Configuración de ESLint                      |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔹 Notas adicionales
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Se utiliza **Turbopack** para acelerar el desarrollo (`dev`).
