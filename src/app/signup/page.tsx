@@ -12,6 +12,7 @@ import AuthLayout from "@/components/layout/views/AuthLayout";
 import MainContainer from "@/components/layout/page/MainContainer";
 import { HiOutlineMail } from "react-icons/hi";
 import Link from "next/link";
+import { useGlobalStore } from "@/store/globalStore";
 
 export default function SignupPage() {
     const router = useRouter();
@@ -22,26 +23,48 @@ export default function SignupPage() {
     const [rut, setRut] = useState("");
     const [email, setEmail] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
+    const { setToken } = useGlobalStore();
+
+    const cleanValues = () => {
+        setRut("");
+        setEmail("");
+        setPassword("");
+        setPasswordConfirm("");
+    }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const rutValue = e.target.value;
         setRut(formatRut(rutValue));
     };
 
-    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.info('> Login call: ', { rut, password });
+        console.info('> SignUp call: ', { rut, email, password });
+        if(!password || !rut || !email) {
+            alert("Por favor, completa todos los campos");
+            return;
+        }
+        if(password !== passwordConfirm) {
+            alert("Las contraseñas no coinciden");
+            return;
+        }
 
-        await backendApi.post("/auth/login", { rut, password })
-            .then(response => {
-                console.log({ response });
-                localStorage.setItem("user", JSON.stringify({ rut, password }));
-                router.push("/home");
-            })
-            .catch(error => {
-                console.log({ error });
-                alert("Credenciales incorrectas");
-            });
+        setToken("TOKEN DE PRUEBA");
+        router.push("/home");
+
+
+        // await backendApi.post("/auth/signup", { rut, email, password })
+        //     .then(response => {
+        //         console.log('Response /auth/signup', { response });
+        //         // localStorage.setItem("user", JSON.stringify({ rut, email, password }));
+        //         setToken(response.data.accessToken);
+        //         router.push("/home");
+        //         cleanValues();
+        //     })
+        //     .catch(error => {
+        //         console.log('Error /auth/signup', { error });
+        //         alert("Credenciales incorrectas");
+        //     });
     }
 
     return (
@@ -51,7 +74,7 @@ export default function SignupPage() {
                     <Image src="https://contablexpert.cl/wp-content/uploads/2025/06/contablexpert.svg" width={200} height={60} className="invert cursor-pointer" alt="Company icon" />
                 }
             >
-                <form onSubmit={handleLogin} className="min-w-96 md:order-2 flex flex-col py-10 px-10 rounded-2xl border">
+                <form onSubmit={handleSignUp} className="min-w-96 md:order-2 flex flex-col py-10 px-10 rounded-2xl border">
                     <div className="flex flex-col gap-5 mb-5">
                         <InputField
                             value={rut}

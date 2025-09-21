@@ -1,22 +1,26 @@
 "use client";
 
+import { useGlobalStore } from "@/store/globalStore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function PrivateLayout({ children }: { children: React.ReactNode }) {
     const router = useRouter();
     const [isAuth, setIsAuth] = useState<boolean | null>(null);
+    const { accessToken, clearAuth } = useGlobalStore();
+    const isHydrated = useGlobalStore.persist.hasHydrated();
 
     useEffect(() => {
-        const user = localStorage.getItem("user");
-        if (!user) {
-            router.replace("/login");
-        } else {
-            setIsAuth(true);
-        }
-    }, [router]);
+     if(isHydrated){
+         if (!accessToken) {
+             router.replace("/login");
+         } else {
+             setIsAuth(true);
+         }
+     }
+    }, [router, accessToken, isHydrated]);
 
-    if (isAuth === null) {
+    if (isAuth === null || !isHydrated) {
         return <p className="p-10">Verificando autenticación...</p>;
     }
 
@@ -26,7 +30,7 @@ export default function PrivateLayout({ children }: { children: React.ReactNode 
                 <a href="/home">Home</a>
                 <button
                     onClick={() => {
-                        localStorage.removeItem("user");
+                        clearAuth()
                         router.replace("/");
                     }}
                 >
