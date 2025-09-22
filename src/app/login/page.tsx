@@ -72,11 +72,7 @@ export default function LoginPage() {
                             </button>
                         </div>
                     </div>
-                    <div className="flex items-center justify-between text-sm">
-                        <div className="flex items-center gap-2 cursor-pointer select-none" onClick={() => setRememberMe((prev) => !prev)}>
-                            <input type="checkbox" checked={rememberMe} onChange={() => setRememberMe((prev) => !prev)} />
-                            <p>Recordar sesión</p>
-                        </div>
+                    <div className="flex items-center justify-end text-sm">
                         <Link href={'/forgotpassword'} className="cursor-pointer text-blue-600 underline hover:text-blue-800 select-none">Olvide mi contraseña</Link>
                     </div>
                     <Button onClick={() => { }} text={'Iniciar sesión'} className="my-5" />
