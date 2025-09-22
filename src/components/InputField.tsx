@@ -31,7 +31,7 @@ const InputField:React.FC<InputFieldProps> = ({ id, label, type = "text", inputM
                     inputMode={inputMode}
                     autoComplete={autoComplete}
                     placeholder={placeholder}
-                    className={`p-3 ps-9 rounded-2xl bg-[#181818] outline-none focus:outline-none focus:bg-[#181818] border border-[#333] w-full ${className}`}
+                    className={`p-3 ps-9 rounded-2xl bg-[#c4c4c4] dark:bg-[#181818] outline-none focus:outline-none focus:bg-[#181818] border border-[#333] w-full ${className}`}
                 />
             </div>
         </div>

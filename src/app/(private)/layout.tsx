@@ -7,20 +7,19 @@ import { useEffect, useState } from "react";
 export default function PrivateLayout({ children }: { children: React.ReactNode }) {
     const router = useRouter();
     const [isAuth, setIsAuth] = useState<boolean | null>(null);
-    const { accessToken, clearAuth } = useGlobalStore();
-    const isHydrated = useGlobalStore.persist.hasHydrated();
+    const { accessToken, clearAuth, hasHydrated } = useGlobalStore();
 
     useEffect(() => {
-     if(isHydrated){
+     if(hasHydrated){
          if (!accessToken) {
              router.replace("/login");
          } else {
              setIsAuth(true);
          }
      }
-    }, [router, accessToken, isHydrated]);
+    }, [router, accessToken, hasHydrated]);
 
-    if (isAuth === null || !isHydrated) {
+    if (isAuth === null || !hasHydrated) {
         return <p className="p-10">Verificando autenticación...</p>;
     }
 
