@@ -6,7 +6,7 @@ const path = require("path");
 function buildDepsTable(sectionTitle, deps) {
   const header = "| Paquete | Versión |\n| ------- | ------- |";
   const rows = Object.keys(deps).map((name) => `| \`${name}\` | ${deps[name]} |`);
-  return `## ${sectionTitle}\n\n${header}\n${rows.join("\n")}\n\n`;
+  return `## ${sectionTitle}\n\n${header}\n${rows.join("\n")}`; // No saltos extra al final
 }
 
 // === Main ===
@@ -21,12 +21,16 @@ function updateReadme() {
   const mainDeps = buildDepsTable("🛠️ Dependencias principales", pkg.dependencies || {});
   const devDeps = buildDepsTable("⚙️ Dependencias de desarrollo", pkg.devDependencies || {});
 
-  // Reemplazar o agregar las secciones completas
-  readme = readme.replace(/## 🛠️ Dependencias principales[\s\S]*?## ⚙️ Dependencias de desarrollo/, mainDeps + devDeps);
+  // Reemplazar secciones, sin agregar saltos de línea adicionales
+  readme = readme.replace(
+    /## 🛠️ Dependencias principales[\s\S]*?## ⚙️ Dependencias de desarrollo/,
+    mainDeps + "\n" + devDeps
+  );
   readme = readme.replace(/## ⚙️ Dependencias de desarrollo[\s\S]*/, devDeps);
 
+  // No agregamos ningún salto adicional al final
   fs.writeFileSync(readmePath, readme);
-  console.log("✅ README.md actualizado");
+  console.log("✅ README.md actualizado sin líneas vacías extra");
 }
 
 updateReadme();

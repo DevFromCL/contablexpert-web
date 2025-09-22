@@ -13,9 +13,10 @@ Este proyecto busca ser escalable, mantenible y fácil de extender.
 | `lint`  | `next lint`            | Ejecuta ESLint para revisar el código   |
 | `update-readme`  | `node scripts/update-readme.js`            | Actualiza dependencias al README.md   |
 
+## 📒 Notas adicionales
+Se utiliza Turbopack para acelerar el desarrollo (dev).
 
-
-## 🔹 Estructura de carpetas
+## 🏗️ Estructura de carpetas
 ```bash
 src/
  ├─ app/                 # Rutas y páginas (Next.js App Router)
