@@ -3,7 +3,7 @@
 interface ButtonProps {
     onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
     text: string;
-    className: string;
+    className?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({ onClick, text, className }) => {

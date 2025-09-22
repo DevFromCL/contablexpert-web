@@ -18,3 +18,7 @@ export const formatRut = (value: string): string => {
 
   return `${formattedBody}-${dv}`;
 };
+
+export const extractNumbers = (str: string): string => {
+  return str.replace(/\D/g, '');
+};

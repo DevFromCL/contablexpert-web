@@ -6,11 +6,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import backendApi from "../../../config/axios";
 import { TbEye, TbEyeClosed, TbLock, TbUser } from "react-icons/tb";
-import { formatRut } from "@/utils";
+import { extractNumbers, formatRut } from "@/utils";
 import Image from "next/image";
 import AuthLayout from "@/components/layout/views/AuthLayout";
 import MainContainer from "@/components/layout/page/MainContainer";
 import Link from "next/link";
+import { useGlobalStore } from "@/store/globalStore";
 
 export default function LoginPage() {
     const router = useRouter();
@@ -18,24 +19,17 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [rut, setRut] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const rutValue = e.target.value;
-        setRut(formatRut(rutValue));
-    };
+    const { setToken } = useGlobalStore();
 
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.info('> Login call: ', { rut, password });
-
-        await backendApi.post("/auth/login", { rut, password })
+        await backendApi.post("/auth/login", { rut: extractNumbers(rut), password })
             .then(response => {
-                console.log({ response });
-                localStorage.setItem("user", JSON.stringify({ rut, password }));
+                setToken(response.data.token)
                 router.push("/home");
             })
             .catch(error => {
-                console.log({ error });
+                console.log('error en /auth/login', error);
                 alert("Credenciales incorrectas");
             });
     }
@@ -51,7 +45,7 @@ export default function LoginPage() {
                     <div className="flex flex-col gap-5 mb-5">
                         <InputField
                             value={rut}
-                            onChange={handleChange}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRut(formatRut(e.target.value))}
                             label=''
                             inputMode="numeric"
                             type="text"
