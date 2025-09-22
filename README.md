@@ -11,6 +11,7 @@ Este proyecto busca ser escalable, mantenible y fácil de extender.
 | --------- | ------------------------ | ---------------------------------------- |
 | `dev`   | `next dev --turbopack` | Inicia la aplicación en modo desarrollo |
 | `lint`  | `next lint`            | Ejecuta ESLint para revisar el código   |
+| `update-readme`  | `node scripts/update-readme.js`            | Actualiza dependencias al README.md   |
 
 
 
@@ -25,16 +26,18 @@ src/
  │
  ├─ components/          # Componentes de UI y bloques reutilizables
  │   ├─ ui/              # Componentes atómicos y sus variantes (Button, Card, Input, etc.)
- │   │  └─ ...
+ │   │
  │   ├─ layout/          # Define la estructura general o contenedores de la página (Se enfoca en cómo se organiza la página, no en el contenido específico)
  │   │  ├─ page          # Contenedores, grids y wrappers
- │   │  └─ nav           # componentes fijos o recurrentes que aparecen en muchas páginas
+ │   │  └─ nav           # Componentes fijos o recurrentes que aparecen en muchas páginas
+ │   │  └─ view          # Layouts específicos de secciones o vistas
  │   │    
  │   ├─ sections/        # Componentes de contenido que forman parte de una página (Hero, Features, CTA, etc.)
  │   └─ forms/           # Formularios (LoginForm, RegisterForm, etc.)
  │
  ├─ utils.ts             # Utilidades y funciones auxiliares
  ├─ hooks/               # Custom hooks de React
+ ├─ store/               # Contexto global
  ├─ styles/              # Estilos 
  └─ config/              # Configuración centralizada (Constantes)
 ```
@@ -42,30 +45,25 @@ src/
 
 ## 🛠️ Dependencias principales
 
-| Paquete         | Versión | Uso principal                    |
-| --------------- | -------- | -------------------------------- |
-| `next`        | 15.4.5   | Framework React para SSR y rutas |
-| `react`       | 19.1.0   | Librería principal de UI        |
-| `react-dom`   | 19.1.0   | Renderizado de React en el DOM   |
-| `axios`       | ^1.11.0  | Cliente HTTP para consumir APIs  |
-| `react-icons` | ^5.5.0   | Íconos para la interfaz         |
-
----
+| Paquete | Versión |
+| ------- | ------- |
+| `axios` | ^1.11.0 |
+| `next` | 15.4.5 |
+| `react` | 19.1.0 |
+| `react-dom` | 19.1.0 |
+| `react-icons` | ^5.5.0 |
+| `zustand` | ^5.0.8 |
 
 ## ⚙️ Dependencias de desarrollo
 
-| Paquete                  | Versión | Uso principal                                 |
-| ------------------------ | -------- | --------------------------------------------- |
-| `typescript`           | ^5       | Tipado estático                              |
-| `tailwindcss`          | ^4       | Framework CSS para estilos utility-first      |
-| `@tailwindcss/postcss` | ^4       | Integración Tailwind + PostCSS               |
-| `eslint`               | ^9       | Linter para mantener calidad de código       |
-| `eslint-config-next`   | 15.4.5   | Configuración ESLint recomendada por Next.js |
-| `@types/react`         | ^19      | Tipos TypeScript para React                   |
-| `@types/react-dom`     | ^19      | Tipos TypeScript para ReactDOM                |
-| `@types/node`          | ^20      | Tipos Node.js                                 |
-| `@eslint/eslintrc`     | ^3       | Configuración de ESLint                      |
-
-## 🔹 Notas adicionales
-
-- Se utiliza **Turbopack** para acelerar el desarrollo (`dev`).
+| Paquete | Versión |
+| ------- | ------- |
+| `@eslint/eslintrc` | ^3 |
+| `@tailwindcss/postcss` | ^4 |
+| `@types/node` | ^20 |
+| `@types/react` | ^19 |
+| `@types/react-dom` | ^19 |
+| `eslint` | ^9 |
+| `eslint-config-next` | 15.4.5 |
+| `tailwindcss` | ^4 |
+| `typescript` | ^5 |

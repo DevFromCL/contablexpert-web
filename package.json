@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "update-readme": "node scripts/update-readme.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
